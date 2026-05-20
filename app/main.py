@@ -2,13 +2,15 @@ import os
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
-from .routers import tasks
+from .routers import admin, tasks, users
 from .schemas import HealthResponse
 from .rooms import room_manager
 
 app = FastAPI(title="Tasks API")
 
 app.include_router(tasks.router)
+app.include_router(users.router)
+app.include_router(admin.router)
 
 
 @app.get("/health", response_model=HealthResponse)
